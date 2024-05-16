@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  server:
+    container_name: coursework-server
+    image: chillingspree/coursework:server
+    ports:
+      - 8000:8000
+  client:
+    container_name: coursework-client
+    image: chillingspree/coursework:client
+    ports:
+      - 5713:5713
+    environment:
+      VITE_API_URL: "http://localhost:8000/"
+    depends_on:
+      server:
+        condition: service_started
